@@ -1,38 +1,46 @@
+import { useState } from "react";
+import { Form } from "./components/Form";
 import { PersonInfo } from "./components/PersonInfo";
 
 const people = [
   {
-    name: 'Jan',
+    name: "Jan",
     tel: 123456789,
-    city: 'Krakow',
+    city: "Krakow",
   },
   {
-    name: 'Filip',
+    name: "Filip",
     tel: 987654321,
-    city: 'Warsaw',
+    city: "Warsaw",
   },
   {
-    name: 'Paweł',
+    name: "Paweł",
     tel: 465739295,
-    city: 'London',
-  }
+    city: "London",
+  },
 ];
 
-
 function App() {
+  const [isFormShown, setIsFormShown] = useState(false);
+  const handleShowFormClick = () => setIsFormShown(true);
   return (
     <>
       <h1>Lista kontaktów</h1>
-      {people.map(person => (
+      {isFormShown ? (
+        <Form />
+      ) : (
+        <button onClick={handleShowFormClick}>Dodaj</button>
+      )}
+      {people.map((person) => (
         <PersonInfo
           key={person.tel}
-          name={person.name} 
-          tel={person.tel} 
-          city={person.city} 
+          name={person.name}
+          tel={person.tel}
+          city={person.city}
         />
       ))}
     </>
   );
-};
+}
 
-export default App
+export default App;
